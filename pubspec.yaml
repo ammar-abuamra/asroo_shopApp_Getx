@@ -37,7 +37,6 @@ dependencies:
     sdk: flutter
   flutter_facebook_auth: ^3.5.0
   flutter_rating_bar: ^4.0.0
-  flutter_simple_rating_bar: ^0.0.3
   get: ^4.5.1
   get_storage: ^2.0.3
   google_fonts: ^2.1.0

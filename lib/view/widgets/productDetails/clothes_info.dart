@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_simple_rating_bar/flutter_simple_rating_bar.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:readmore/readmore.dart';
 import '../../../logic/controllers/product_controller.dart';
 import '../../../utils/theme.dart';
 import '../text_utils.dart';
 
-class ClothesInfo extends StatelessWidget {
+class ClothesInfo extends StatefulWidget {
   final String title;
   final int productId;
-  final double rate;
+  late final double rate;
   final String description;
   ClothesInfo({
     required this.title,
@@ -19,6 +19,11 @@ class ClothesInfo extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
+  @override
+  State<ClothesInfo> createState() => _ClothesInfoState();
+}
+
+class _ClothesInfoState extends State<ClothesInfo> {
   final controller = Get.find<ProductController>();
 
   @override
@@ -33,7 +38,7 @@ class ClothesInfo extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  title,
+                  widget.title,
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     fontSize: 20,
@@ -53,9 +58,9 @@ class ClothesInfo extends StatelessWidget {
                   ),
                   child: InkWell(
                     onTap: () {
-                      controller.manageFavourites(productId);
+                      controller.manageFavourites(widget.productId);
                     },
-                    child: controller.isFavourites(productId)
+                    child: controller.isFavourites(widget.productId)
                         ? const Icon(
                             Icons.favorite,
                             color: Colors.red,
@@ -76,7 +81,7 @@ class ClothesInfo extends StatelessWidget {
               TextUtils(
                 fontSize: 14,
                 fontWeight: FontWeight.bold,
-                text: "$rate",
+                text: "${widget.rate}",
                 color: Get.isDarkMode ? Colors.white : Colors.black,
                 underLine: TextDecoration.none,
               ),
@@ -84,17 +89,24 @@ class ClothesInfo extends StatelessWidget {
                 width: 8,
               ),
               RatingBar(
-                rating: rate,
-                icon: const Icon(Icons.star, size: 20, color: Colors.grey),
-                starCount: 5,
-                spacing: 1,
-                size: 20,
-                isIndicator: false,
+
+                initialRating: widget.rate,
+                itemSize: 25,
+                ratingWidget: RatingWidget(
+                  full: const Icon(Icons.star, size: 5, color: Colors.yellow),
+                  half: const Icon(Icons.star, size: 5, color: Colors.yellow),
+                  empty: const Icon(Icons.star, size: 5, color: Colors.grey),
+                ),
+                itemCount: 5,
+                maxRating: 1,
+
                 allowHalfRating: true,
-                onRatingCallback: (value, isIndictor) {
-                  isIndictor.value = true;
+                onRatingUpdate: (rating) {
+                  setState(() {
+                    widget.rate = rating;
+                  });
                 },
-                color: Colors.orangeAccent,
+                //   color: Colors.orangeAccent,
               ),
             ],
           ),
@@ -102,7 +114,7 @@ class ClothesInfo extends StatelessWidget {
             height: 20,
           ),
           ReadMoreText(
-            description,
+            widget.description,
             trimLines: 3,
             textAlign: TextAlign.justify,
             trimMode: TrimMode.Line,

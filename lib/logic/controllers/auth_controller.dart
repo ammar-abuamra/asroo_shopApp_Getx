@@ -1,6 +1,5 @@
 import 'dart:io';
 
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
@@ -33,7 +32,7 @@ class AuthController extends GetxController {
   void onInit() {
     displayUserName.value =
         userProfile != null ? userProfile!.displayName! : "";
-    displayUserPhoto.value = (userProfile != null ? userProfile!.photoURL : "")!;
+    //  displayUserPhoto.value = (userProfile != null ? userProfile!.photoURL : "")!;
     displayEmail.value = userProfile != null ? userProfile!.email! : "";
     super.onInit();
   }
@@ -161,7 +160,7 @@ class AuthController extends GetxController {
     try {
       final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
       displayUserName.value = googleUser!.displayName!;
-      displayUserPhoto.value = googleUser.photoUrl!;
+      // displayUserPhoto.value = googleUser.photoUrl!;
       displayEmail.value = googleUser.email;
       // print(googleUser);
       GoogleSignInAuthentication googleSignInAuthentication =
@@ -242,7 +241,7 @@ class AuthController extends GetxController {
     try {
       await auth.signOut();
       await googleSignIn.signOut();
-      await FacebookAuth.i.logOut();
+      // await FacebookAuth.i.logOut();
       displayUserName.value = '';
       displayUserPhoto.value = '';
       isSignedIn = false;
