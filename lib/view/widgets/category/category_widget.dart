@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'category_items.dart';
 
 import '../../../logic/controllers/product_controller.dart';
-import '../../../routes/routes.dart';
-import '../../../utils/theme.dart';
+import 'category_items.dart';
 
 class CategoryWidget extends StatelessWidget {
   CategoryWidget({Key? key}) : super(key: key);
@@ -22,35 +20,28 @@ class CategoryWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(
       () {
-        if (productController.showCategoryNames.value) {
-          return Center(
-            child: CircularProgressIndicator(
-              color: Get.isDarkMode ? pinkClr : mainColor,
-            ),
-          );
-        } else {
-          return Expanded(
-            child: ListView.separated(
-              itemBuilder: (context, index) {
-                return InkWell(
-                  onTap: () {
-                    productController.getCategoryIndex(index);
-                  
-                    Get.to(() => CategoryItems(
-                          title: productController.categoryNameList[index],
-                        ));
-                  },
-                  child: Container(
-                    height: 150,
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10),
-                      image: DecorationImage(
-                        image: NetworkImage(
-                          imageCategory[index],
-                        ),
-                        fit: BoxFit.cover,
+        return Expanded(
+        child: ListView.separated(
+          itemBuilder: (context, index) {
+            return InkWell(
+              onTap: () {
+                // productController.getCategoryIndex(index);
+
+                Get.to(() => CategoryItems(
+                      title: productController.categoryNameList[index],
+                    ));
+              },
+              child: Container(
+                height: 150,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                  image: DecorationImage(
+                    image: NetworkImage(
+                      imageCategory[index],
+                    ),
+                    fit: BoxFit.cover,
                       ),
                     ),
                     child: Padding(
@@ -69,18 +60,16 @@ class CategoryWidget extends StatelessWidget {
                       ),
                     ),
                   ),
-                );
-              },
-              separatorBuilder: (context, index) {
-                return const SizedBox(
-                  height: 20,
-                );
-              },
-              itemCount: productController.categoryNameList.length,
-            ),
-          );
-        }
-      },
-    );
+            );
+          },
+          separatorBuilder: (context, index) {
+            return const SizedBox(
+              height: 20,
+            );
+          },
+          itemCount: productController.categoryNameList.length,
+        ),
+      );
+    });
   }
 }

@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get_storage/get_storage.dart';
+
+import '../../Data_Db.dart';
 import '../../models/product_models.dart';
-import '../../services/category_services.dart';
-import '../../services/product_services.dart';
 
 class ProductController extends GetxController {
-  var productList = <ProductModels>[].obs;
-  var favouritesList = <ProductModels>[].obs;
+  var productList = data.obs;
+  var favouritesList = data.obs;
   var isLoading = true.obs;
   var stoarge = GetStorage();
-  var imageList = <ProductModels>[].obs;
+  var imageList = data.obs;
 
   //search
-  var searchList = <ProductModels>[].obs;
+  var searchList = data.obs;
   TextEditingController searchTextController = TextEditingController();
 
   @override
@@ -24,25 +24,25 @@ class ProductController extends GetxController {
     List? storedShoppings = stoarge.read<List>('isFavouritesList');
 
     if (storedShoppings != null) {
-      favouritesList =
-          storedShoppings.map((e) => ProductModels.fromJson(e)).toList().obs;
+      // favouritesList =
+      //     storedShoppings.map((e) => ProductModels.fromJson(e)).toList().obs;
     }
-    getProducts();
-    getCategoryes();
+    // getProducts();
+    // getCategoryes();
   }
 
-  void getProducts() async {
-    var products = await ProductServices.getProduct();
-
-    try {
-      isLoading(true);
-      if (products.isNotEmpty) {
-        productList.addAll(products);
-      }
-    } finally {
-      isLoading(false);
-    }
-  }
+  // void getProducts() async {
+  //   // var products = await ProductServices.getProduct();
+  //
+  //   try {
+  //     isLoading(true);
+  //     if (products.isNotEmpty) {
+  //       productList.addAll(products);
+  //     }
+  //   } finally {
+  //     isLoading(false);
+  //   }
+  // }
 
   // Logic for Favourites Screen
 
@@ -88,38 +88,37 @@ class ProductController extends GetxController {
 
   //Category Lis Featch data
 
-  
   var categoryNameList = <String>[].obs;
   var categoryList = <ProductModels>[].obs;
 
   var showGridView = false.obs;
   var showCategoryNames = false.obs;
 
-  void getCategoryes() async {
-    var categoryName = await CategoryServices.getCategory();
+// void getCategoryes() async {
+//   // var categoryName = await CategoryServices.getCategory();
+//
+//   try {
+//     showCategoryNames(true);
+//     if (categoryName.isNotEmpty) {
+//       categoryNameList.addAll(categoryName);
+//     }
+//   } finally {
+//     showCategoryNames(false);
+//   }
+// }
 
-    try {
-      showCategoryNames(true);
-      if (categoryName.isNotEmpty) {
-        categoryNameList.addAll(categoryName);
-      }
-    } finally {
-      showCategoryNames(false);
-    }
-  }
+// loadCategory(String categoryName) async {
+//   showGridView(true);
+//   categoryList.value = await AllCategoryServices.getALLCategory(categoryName);
+//
+//   showGridView(false);
+// }
 
-  loadCategory(String categoryName) async {
-    showGridView(true);
-    categoryList.value = await AllCategoryServices.getALLCategory(categoryName);
-
-    showGridView(false);
-  }
-
-  getCategoryIndex(index) async {
-    var categoryAllName = await loadCategory(categoryNameList[index]);
-
-    if (categoryAllName != null) {
-      categoryList.value = categoryAllName;
-    }
-  }
+// getCategoryIndex(index) async {
+//   var categoryAllName = await loadCategory(categoryNameList[index]);
+//
+//   if (categoryAllName != null) {
+//     categoryList.value = categoryAllName;
+//   }
+// }
 }
