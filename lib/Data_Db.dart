@@ -6,7 +6,7 @@ final data = [
       title: 'title',
       price: 1.2,
       description: 'description',
-      category: 'category',
+      category: 'electronics',
       image:
           'https://th.bing.com/th/id/R.6ec88e2869458d5d9a6bccfe233d4fa5?rik=K05NKY0eMIYZsw&pid=ImgRaw&r=0',
       rating: Rating(rate: 1.2, count: 1)),
@@ -15,7 +15,7 @@ final data = [
       title: 'title',
       price: 1.2,
       description: 'description',
-      category: 'category',
+      category: 'electronics',
       image:
           'https://th.bing.com/th/id/R.6ec88e2869458d5d9a6bccfe233d4fa5?rik=K05NKY0eMIYZsw&pid=ImgRaw&r=0',
       rating: Rating(rate: 1.2, count: 1)),

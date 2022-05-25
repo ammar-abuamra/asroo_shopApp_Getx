@@ -4,7 +4,6 @@ import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get_storage/get_storage.dart';
 
 import '../../Data_Db.dart';
-import '../../models/product_models.dart';
 
 class ProductController extends GetxController {
   var productList = data.obs;
@@ -89,7 +88,7 @@ class ProductController extends GetxController {
   //Category Lis Featch data
 
   var categoryNameList = <String>[].obs;
-  var categoryList = <ProductModels>[].obs;
+  var categoryList = data.obs;
 
   var showGridView = false.obs;
   var showCategoryNames = false.obs;

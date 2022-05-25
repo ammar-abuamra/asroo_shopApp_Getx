@@ -2,6 +2,8 @@
 //
 //     final productModels = productModelsFromJson(jsonString);
 
+import 'package:udemy_shop_app/view/widgets/category/category_items.dart';
+
 class ProductModels {
   ProductModels({
     required this.id,
@@ -61,3 +63,5 @@ class EnumValues<T> {
     return reverseMap;
   }
 }
+
+final cat = [CategoryItems(title: 'electronics')];
